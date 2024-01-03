@@ -1,0 +1,60 @@
+CREATE TRIGGER COMP2001HK_CCming
+ON dbo.Profiles
+AFTER INSERT, UPDATE, DELETE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Handle INSERT operation
+    IF EXISTS (SELECT * FROM inserted)
+    BEGIN
+    
+        INSERT INTO dbo.roles (Role_ID, Role)
+        SELECT inserted.Profile_ID, 'User'
+        FROM inserted;
+        
+        
+        INSERT INTO Profile_Details (Profile_Details_ID, Bio)
+        SELECT inserted.Profile_ID, 'New user Bios'
+        FROM inserted;
+        
+        
+        INSERT INTO Location (Location_ID, [Location])
+        SELECT inserted.Profile_ID, 'New user location'
+        FROM inserted;
+    END
+    
+    -- Handle UPDATE operation
+    IF EXISTS (SELECT * FROM deleted)
+    BEGIN
+        -- Update the corresponding records in Role, Profile_Details, and Location when a Profile is updated
+        UPDATE dbo.Roles
+        SET Role = 'Updated User'
+        FROM dbo.Roles
+        INNER JOIN deleted ON dbo.Roles.Role_ID = deleted.Profile_ID;
+        
+        UPDATE dbo.Profile_Details
+        SET Bio = 'Updated user details'
+        FROM dbo.Profile_Details
+        INNER JOIN deleted ON dbo.Profile_Details.Profile_Details_ID = deleted.Profile_ID;
+        
+        UPDATE dbo.Location
+        SET Location = 'Updated user location'
+        FROM Location
+        INNER JOIN deleted ON Location.Profile_Details_ID = deleted.Profile_ID;
+    END
+    
+    -- Handle DELETE operation
+    IF EXISTS (SELECT * FROM deleted)
+    BEGIN
+        -- Delete the corresponding records in Role, Profile_Details, and Location when a Profile is deleted
+        DELETE FROM dbo.Roles
+        WHERE Role_ID IN (SELECT Role_ID FROM deleted);
+        
+        DELETE FROM dbo.Profile_Details
+        WHERE Profile_ID IN (SELECT Profile_ID FROM deleted);
+        
+        DELETE FROM dbo.Location
+        WHERE Profile_Details_ID IN (SELECT Profile_Details_ID FROM deleted);
+    END
+END;
