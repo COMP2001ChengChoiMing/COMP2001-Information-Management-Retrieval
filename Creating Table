@@ -1,0 +1,37 @@
+-- Create Profiles table
+CREATE TABLE Profiles (
+    Profile_ID INT PRIMARY KEY,
+    Username VARCHAR(255),
+    Email VARCHAR(255),
+    Password VARCHAR(255)
+);
+
+-- Create Roles table
+CREATE TABLE Roles (
+    Role_ID INT PRIMARY KEY,
+    Role VARCHAR(255)
+);
+
+-- Create Profile_Details table
+CREATE TABLE Profile_Details (
+    Profile_Details_ID INT PRIMARY KEY,
+    Profile_ID INT,
+    Bio VARCHAR(MAX),
+    CONSTRAINT FK_Profile_Details_Profile FOREIGN KEY (Profile_ID) REFERENCES Profiles(Profile_ID)
+);
+
+-- Create Interests table
+CREATE TABLE Interests (
+    Interests_ID INT PRIMARY KEY,
+    Profile_Details_ID INT,
+    Interest VARCHAR(255),
+    CONSTRAINT FK_Interests_Profile_Details FOREIGN KEY (Profile_Details_ID) REFERENCES Profile_Details(Profile_Details_ID)
+);
+
+-- Create Location table
+CREATE TABLE Location (
+    Location_ID INT PRIMARY KEY,
+    Profile_Details_ID INT,
+    Location VARCHAR(255),
+    CONSTRAINT FK_Location_Profile_Details FOREIGN KEY (Profile_Details_ID) REFERENCES Profile_Details(Profile_Details_ID)
+);
