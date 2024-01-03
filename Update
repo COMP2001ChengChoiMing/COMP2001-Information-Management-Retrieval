@@ -1,0 +1,24 @@
+-- Update the Profile table
+UPDATE dbo.Profiles
+SET Username = 'JohnDoeUpdated', Email = 'johndoe@example.com'
+WHERE Profile_ID = 1;
+
+-- Update the Role table
+UPDATE dbo.Roles
+SET Role = 'Admin'
+WHERE Role_ID = 1;
+
+-- Update the Profile_Details table
+UPDATE dbo.Profile_Details
+SET Bio = 'New Staff'
+WHERE Profile_ID = 1;
+
+-- Update the Location table
+UPDATE dbo.Location
+SET Location = 'Updated user location'
+WHERE Location_ID = 1;
+
+-- Update the Interests table
+UPDATE dbo.Interests
+SET Interest= 'Running'
+WHERE Profile_Details_ID = 1;
