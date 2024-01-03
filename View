@@ -1,0 +1,19 @@
+USE COMP2001HK_CCming;
+Go
+
+CREATE VIEW dbo.ProfileInfoView
+AS
+SELECT
+    p.Profile_ID,
+    p.Username,
+    p.Email,
+    r.Role,
+    pd.Bio,
+    i.Interest,
+    l.Location
+FROM
+    Profiles p
+    JOIN Roles r ON p.Profile_ID = r.Role_ID
+    JOIN Profile_Details pd ON p.Profile_ID = pd.Profile_ID
+    JOIN Interests i ON pd.Profile_Details_ID = i.Profile_Details_ID
+    JOIN Location l ON pd.Profile_Details_ID = l.Profile_Details_ID;
