@@ -1,0 +1,44 @@
+-- Insert data into Profiles table
+INSERT INTO Profiles (Profile_ID, Username, Email, Password)
+VALUES
+    (1, 'JohnDoe', 'johndoe@gmail.com', 'password123'),
+    (2, 'JaneSmith', 'janesmith@gmail.com', 'abc123'),
+    (3, 'MikeJohnson', 'mikejohnson@gmail.com', 'pass456'),
+    (4, 'SarahAdams', 'sarahadams@gmail.com', 'qwerty'),
+    (5, 'DavidBrown', 'davidbrown@gmail.com', 'hello123');
+
+-- Insert data into Roles table
+INSERT INTO Roles (Role_ID, Role)
+VALUES
+    (1, 'Admin'),
+    (2, 'User'),
+    (3, 'Guest'),
+    (4, 'Moderator'),
+    (5, 'Editor');
+
+-- Insert data into Profile_Details table
+INSERT INTO Profile_Details (Profile_Details_ID, Profile_ID, Bio)
+VALUES
+    (1, 1, ' Exploring rugged terrains and immersing myself in the beauty of nature while hiking is my ultimate escape. The serenity of the mountains and the thrill of conquering challenging trails fuel my adventurous spirit '),
+    (2, 2, ' Roaming through untamed wilderness and embracing the wonders of the great outdoors is where I come alive. Hiking fuels my spirit of adventure, provides a sense of accomplishment, and allows me to witness the raw beauty of nature.'),
+    (3, 3, Running is more than just a physical activity for me; it's a form of meditation. With every stride, I feel a sense of empowerment and clarity. Whether it's a marathon or a casual jog, running brings out the best version of myself. '),
+    (4, 4, 'Enjoy camping and spending time with family outdoors.'),
+    (5, 5, ' Running is my constant companion and my greatest teacher. It challenges me physically, mentally, and emotionally, teaching me resilience, discipline, and perseverance. With every run, I push my limits and uncover the strength within me.');
+
+-- Insert data into Interests table
+INSERT INTO Interests (Interests_ID, Profile_Details_ID, Interest)
+VALUES
+    (1, 1, 'Hiking'),
+    (2, 2, 'Hiking'),
+    (3, 3, 'Running'),
+    (4, 4, 'Walking'),
+    (5, 5, 'Running');
+
+-- Insert data into Location table
+INSERT INTO Location (Location_ID, Profile_Details_ID, Location)
+VALUES
+    (1, 1, ' Snowdonia National Park, Wales'),
+    (2, 2, ' Lake District National Park, England'),
+    (3, 3, Ben Nevis, Scotland'),
+    (4, 4, ' Peak District National Park, England'),
+    (5, 5, ' Giant's Causeway, Northern Ireland');
